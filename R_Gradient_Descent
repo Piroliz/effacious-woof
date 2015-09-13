@@ -1,0 +1,35 @@
+
+# t
+time <- seq(-20,10,len=100)
+
+# f(t)
+f_t <- function(time) {1.5*(time+4)^2 + 2}
+
+# plotting
+plot(time, f_t(time), type = "l",main = "Gradient descent",xlab = "time", ylab = "f(t)", lwd = 3)
+
+# df/dt
+grad <- function(time){3*(time+4)}
+
+lines (c(-4,-4),c(-5,200), col="red",lty=3, lwd = 3)
+#text (2.1,7, "Closedform solution",col="red",pos=4)
+
+# initial value
+tg <- 0.1
+ttrace <- tg
+ftrace <- f_t(tg)
+stepFactor <- 0.2
+
+#implementation
+for (step in 1:100){
+  tg <- tg - stepFactor*grad(tg)
+  ttrace <- c(ttrace,tg)
+  ftrace <- c(ftrace, f_t(tg))
+}
+# add line segment for demo
+lines(ttrace,ftrace,type = "b", col = "blue",lwd = 2)
+
+#print results
+print(tg)
+print (f_t(tg))
+  
